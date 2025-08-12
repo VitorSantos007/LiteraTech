@@ -34,10 +34,7 @@ body {
     height: 40px;
 }
 
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
+
 
 .nav-item {
     color: var(--text-light);
@@ -47,11 +44,7 @@ body {
     transition: color 0.3s ease;
 }
 
-.nav-item:hover {
-    color: var(--primary-color);
-}
 
-/* Hero Section (Seção principal) */
 .hero-section {
     position: relative;
     width: 100%;
