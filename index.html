@@ -7,10 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Casa Bella - Loja de Livros">
   <title>LiteraTech</title>
-  <link rel="stylesheet" href="css/CSS.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
 
-        /* Sobre img */
+    /* Sobre img */
     #sobre {
       padding: 60px 20px;
       background: #f4f4f4;
@@ -19,89 +19,6 @@
               url('img/fundo_sobre.jpeg');
               color: white;
     }
-
-/* Carrinho */
-.cart-container {
-  position: relative;
-  display: inline-block;
-  margin-left: auto;
-  cursor: pointer;
-}
-
-#cartIcon {
-  width: 40px;
-  height: 40px;
-}
-
-#cartCount {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: red;
-  color: white;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
-  font-size: 14px;
-}
-
-.cart-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 50px;
-  width: 350px;
-  background: #fff;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
-
-.cart-item {
-  display: flex;
-  flex-direction: column; /* <<< força empilhar um abaixo do outro */
-  align-items: flex-start;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-
-.cart-item img {
-  width: 60px;
-  height: 80px;
-  object-fit: cover;
-  margin-bottom: 5px;
-}
-
-.cart-item-details {
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-.cart-item div {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-
-.cart-item input {
-  width: 40px;
-  margin: 0 5px;
-  text-align: center;
-}
-
-.cart-item button {
-  background: red;
-  color: white;
-  border: none;
-  padding: 2px 6px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
 
   </style>
 </head>
@@ -133,12 +50,12 @@
     <button class="btn" id="checkoutBtn">Finalizar Compra</button>
   </div>
 </div>
-
-
     </nav>
   </header>
 
-  <!-- Inicial -->
+
+
+  <!-- Inicio -->
 
   <section id="home">
     <div class="banner">
@@ -152,7 +69,8 @@
   </section>
 
 
-  <!-- Seção Produtos -->
+
+  <!-- Produtos -->
   <section id="produtos">
     <h2>Nossos Livros</h2>
 
@@ -219,10 +137,14 @@
     <p>Telefone: (11) 99999-9999</p>
   </section>
 
+
+
   <!-- Rodapé -->
   <footer>
     <p>&copy; 2025 LiteraTech - Todos os direitos reservados.</p>
   </footer>
+
+
 
   <!--  Modal -->
   <div id="modal" class="modal">
@@ -235,6 +157,7 @@
       <p><strong>Descrição:</strong> <span id="modalDescricao"></span></p>
     </div>
   </div>
+
 
 
   <!-- Scripts -->
@@ -274,42 +197,42 @@
       }
     }
 
-// Carrinho
-const cartIcon = document.getElementById('cartIcon');
-const cartMenu = document.getElementById('cartMenu');
-const cartCount = document.getElementById('cartCount');
-const cartTotal = document.getElementById('cartTotal');
-const cartItemsList = document.getElementById('cartItems');
+    // Carrinho
+    const cartIcon = document.getElementById('cartIcon');
+    const cartMenu = document.getElementById('cartMenu');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const cartItemsList = document.getElementById('cartItems');
 
-let cartItems = [];
+    let cartItems = [];
 
-// Toggle menu carrinho
-cartIcon.addEventListener('click', () => {
-  cartMenu.style.display = cartMenu.style.display === 'block' ? 'none' : 'block';
-});
+   
+    cartIcon.addEventListener('click', () => {
+      cartMenu.style.display = cartMenu.style.display === 'block' ? 'none' : 'block';
+    });
 
-// Fechar ao clicar fora
-window.addEventListener('click', function(e) {
-  if (!cartMenu.contains(e.target) && e.target !== cartIcon) {
-    cartMenu.style.display = 'none';
-  }
-});
 
-// Atualizar carrinho
-function atualizarCarrinho() {
-  cartItemsList.innerHTML = '';
+    window.addEventListener('click', function(e) {
+      if (!cartMenu.contains(e.target) && e.target !== cartIcon) {
+        cartMenu.style.display = 'none';
+    }
+    });
 
-  if (cartItems.length === 0) {
-    cartItemsList.innerHTML = '<li>Seu carrinho está vazio.</li>';
-    cartCount.textContent = 0;
-    cartTotal.textContent = '0,00';
-    return;
-  }
 
-  let novoTotal = 0;
+    function atualizarCarrinho() {
+      cartItemsList.innerHTML = '';
 
-  cartItems.forEach((item, index) => {
-    novoTotal += item.preco * item.quantidade;
+      if (cartItems.length === 0) {
+      cartItemsList.innerHTML = '<li>Seu carrinho está vazio.</li>';
+      cartCount.textContent = 0;
+      cartTotal.textContent = '0,00';
+      return;
+    }
+
+    let novoTotal = 0;
+
+    cartItems.forEach((item, index) => {
+      novoTotal += item.preco * item.quantidade;
 
     const li = document.createElement('li');
     li.className = 'cart-item';
@@ -324,50 +247,50 @@ function atualizarCarrinho() {
       </div>
     `;
     cartItemsList.appendChild(li);
-  });
+    });
 
-  cartCount.textContent = cartItems.length;
-  cartTotal.textContent = novoTotal.toFixed(2).replace('.', ',');
-}
+    cartCount.textContent = cartItems.length;
+    cartTotal.textContent = novoTotal.toFixed(2).replace('.', ',');
+    }
 
-// Adicionar item ao carrinho
-function adicionarAoCarrinho(titulo, precoStr, imgSrc) {
-  let preco = parseFloat(precoStr.replace('R$ ', '').replace(',', '.'));
 
-  const itemExistente = cartItems.find(item => item.titulo === titulo);
-  if (itemExistente) {
-    itemExistente.quantidade += 1;
-  } else {
-    cartItems.push({ titulo, preco, quantidade: 1, img: imgSrc });
-  }
+    function adicionarAoCarrinho(titulo, precoStr, imgSrc) {
+      let preco = parseFloat(precoStr.replace('R$ ', '').replace(',', '.'));
 
-  atualizarCarrinho();
-}
+    const itemExistente = cartItems.find(item => item.titulo === titulo);
+     if (itemExistente) {
+     itemExistente.quantidade += 1;
+      } else {
+       cartItems.push({ titulo, preco, quantidade: 1, img: imgSrc });
+      }
 
-// Alterar quantidade
-function alterarQuantidade(index, novaQuantidade) {
-  novaQuantidade = parseInt(novaQuantidade);
-  if (novaQuantidade < 1) novaQuantidade = 1;
-  cartItems[index].quantidade = novaQuantidade;
-  atualizarCarrinho();
-}
+    atualizarCarrinho();
+    }
 
-// Remover item
-function removerItem(index) {
-  cartItems.splice(index, 1);
-  atualizarCarrinho();
-}
 
-// Finalizar compra
-document.getElementById('checkoutBtn').addEventListener('click', () => {
-  if(cartItems.length === 0){
-    alert('O carrinho está vazio!');
-    return;
-  }
-  alert('Compra concluída com sucesso!');
-  cartItems = [];
-  atualizarCarrinho();
-});
+    function alterarQuantidade(index, novaQuantidade) {
+    novaQuantidade = parseInt(novaQuantidade);
+    if (novaQuantidade < 1) novaQuantidade = 1;
+    cartItems[index].quantidade = novaQuantidade;
+    atualizarCarrinho();
+    }
+
+
+    function removerItem(index) {
+    cartItems.splice(index, 1);
+    atualizarCarrinho();
+    }
+
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if(cartItems.length === 0){
+       alert('O carrinho está vazio!');
+       return;
+      }
+    alert('Compra concluída com sucesso!');
+    cartItems = [];
+    atualizarCarrinho();
+    });
 
   </script>
 
