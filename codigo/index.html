@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="img/Literatech_logo.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <title>LiteraTech</title>
     <link rel="stylesheet" href="CSS.css">
 </head>
@@ -11,22 +15,107 @@
 
     <header class="navbar">
         <div class="logo">
-            <img src="" alt="Logo">
+            <img src="" href="img/Literatech_logo.PNG" alt="Logo">
         </div>
         <nav class="nav-links">
             <a href="index.html" class="nav-item">HOME</a>
-            <a href="#Produtos" class="nav-item">PRODUTOS</a>
+            <a href="#" class="nav-item">PRODUTOS</a>
             <a href="#" class="nav-item">CONTATO</a>
         </nav>
     </header>
 
-    <main class="hero-section">
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <h1>LiteraTech</h1>
-            <p>A sua próxima leitura está a um clique de distância.</p>
-        </div>
+    <main class="section">
+        <div class="escuro"></div>
+        <h1>LiteraTech</h1>
+        <br>
+        <p> </p>
+        <p>A sua próxima leitura está a um clique de distância.</p>
     </main>
+
+    <section id="produtos">
+    <h2>Nossos Livros</h2>
+
+    <div class="filtro">
+      <label for="filtro-categoria">Filtrar por Gênero:</label>
+      <select id="filtro-categoria" onchange="filtrarLivros()">
+        <option value="todos">Todos</option>
+        <option value="terror">Terror</option>
+        <option value="romance">Romance</option>
+        <option value="fantasia">Fantasia</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      <!-- Livro 1 -->
+      <div class="product" data-categoria="terror">
+        <img src="livro1.jpg" alt="Livro 1">
+        <h3>O Chamado do Terror</h3>
+        <p><strong>Autor:</strong> João Silva</p>
+        <p><strong>Editora:</strong> Sombras</p>
+        <p class="preco">R$ 49,90</p>
+      </div>
+      <!-- Livro 2 -->
+      <div class="product" data-categoria="romance">
+        <img src="livro2.jpg" alt="Livro 2">
+        <h3>Amor nas Estrelas</h3>
+        <p><strong>Autor:</strong> Maria Santos</p>
+        <p><strong>Editora:</strong> Encantos</p>
+        <p class="preco">R$ 39,90</p>
+      </div>
+      <!-- Livro 3 -->
+      <div class="product" data-categoria="terror">
+        <img src="livro3.jpg" alt="Livro 3">
+        <h3>Noites de Sombra</h3>
+        <p><strong>Autor:</strong> Carlos Nogueira</p>
+        <p><strong>Editora:</strong> Mistério</p>
+        <p class="preco">R$ 54,90</p>
+      </div>
+      <!-- Livro 4 -->
+      <div class="product" data-categoria="fantasia">
+        <img src="livro4.jpg" alt="Livro 4">
+        <h3>Reinos de Fogo</h3>
+        <p><strong>Autor:</strong> Ana Costa</p>
+        <p><strong>Editora:</strong> Dragão Dourado</p>
+        <p class="preco">R$ 59,90</p>
+      </div>
+            <div class="product" data-categoria="fantasia">
+        <img src="livro5.jpg" alt="Livro 5">
+        <h3>Reinos de Fogo</h3>
+        <p><strong>Autor:</strong> Ana Costa</p>
+        <p><strong>Editora:</strong> Dragão Dourado</p>
+        <p class="preco">R$ 59,90</p>
+      </div>
+                  <div class="product" data-categoria="fantasia">
+        <img src="livro6.jpg" alt="Livro 6">
+        <h3>Reinos de Fogo</h3>
+        <p><strong>Autor:</strong> Ana Costa</p>
+        <p><strong>Editora:</strong> Dragão Dourado</p>
+        <p class="preco">R$ 59,90</p>
+      </div>
+    </div>
+  </section>
+    
+  <footer>
+    <p>&copy; 2025 LiteraTech Livros - Todos os direitos reservados.</p>
+  </footer>
+ 
+  <!-- Script do filtro -->
+  <script>
+    function filtrarLivros() {
+      const filtro = document.getElementById("filtro-categoria").value;
+      const livros = document.querySelectorAll(".product");
+ 
+      livros.forEach(livro => {
+        const categoria = livro.getAttribute("data-categoria");
+ 
+        if (filtro === "todos" || categoria === filtro) {
+          livro.style.display = "block";
+        } else {
+          livro.style.display = "none";
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>

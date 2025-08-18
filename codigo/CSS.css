@@ -14,9 +14,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    background-color: #f4f4f4;
-}
 
 .navbar {
     position: absolute; 
@@ -30,8 +27,9 @@ body {
     z-index: 1000;
 }
 
-.logo img {
-    height: 40px;
+.logo{
+    background-image: url(img/Literatech_logo.PNG); 
+    height: 15px;
 }
 
 
@@ -45,8 +43,7 @@ body {
 }
 
 
-.hero-section {
-    position: relative;
+.section {
     width: 100%;
     height: 100vh;
     background-image: url(img/estante_fundo.jpg); 
@@ -57,9 +54,12 @@ body {
     align-items: center;
     text-align: center;
     color: var(--text-light);
+    z-index: 10;
+    font-size: 35px;
+    padding: 20px;
 }
 
-.overlay {
+.escuro {
     position: absolute;
     top: 0;
     left: 0;
@@ -68,9 +68,86 @@ body {
     background-color: var(--bg-overlay);
 }
 
-.hero-content {
-    position: center;
-    z-index: 10;
-    font-size: 35px;
-    padding: 20px;
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+        max-width: 400px;
+    }
 }
+
+.produtos {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.produtos .filtro {
+    margin-bottom: 30px;
+}
+
+.produtos .filtro select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px; 
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+.produtos .product-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.produtos .product {
+    width: 250px;
+    margin: 15px;
+    text-align: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.produtos .product:hover {
+    transform: scale(1.05);
+}
+
+.produtos .product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.produtos .product h3 {
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+
+.produtos .product p {
+    margin: 4px 0;
+    font-size: 15px;
+}
+
+.produtos .preco {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff6600;
+    margin-top: 8px;
+}
+
+/* Rodapé */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    }
+ 
+.footer p {
+    margin: 0;
+    }
