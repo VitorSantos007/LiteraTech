@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/png" href="img/Literatech_logo.PNG">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Casa Bella - Loja de Livros">
+  <title>LiteraTech</title>
+  <link rel="stylesheet" href="css/CSS.css">
+  <style>
+
+        /* Sobre img */
+    #sobre {
+      padding: 60px 20px;
+      background: #f4f4f4;
+      text-align: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('img/fundo_sobre.jpeg');
+              color: white;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Cabeçalho -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="img/Literatech_logo.PNG" alt="literatech logo">
+      </div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#produtos">Livros</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Inicial -->
+
+  <section id="home">
+    <div class="banner">
+      <img src="img/estante_fundo.jpg" alt="literatech Banner">
+      <div class="cta">
+        <h1>Bem-vindo à LiteraTech</h1>
+        <p>A sua próxima leitura está a um clique de distância.</p>
+        <a href="#produtos" class="btn">Ver Produtos</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Seção Produtos -->
+  <section id="produtos">
+    <h2>Nossos Livros</h2>
+
+    
+   <!-- Filtrar categorias -->
+    <div class="filter">
+      <label for="filtro-categoria">Filtrar por categoria:</label>
+      <select id="filtro-categoria" onchange="filtrarLivros()">
+        <option value="todos">Todos</option>
+        <option value="acao">Ação</option>
+        <option value="comedia">Comedia</option>
+        <option value="fabula">Fábula</option>
+        <option value="hq">HQ</option>
+        <option value="romance">Romance</option>
+        <option value="terror">Terror</option>
+      </select>
+    </div>
+
+    <div class="products">
+      <div class="product" data-categoria="romance">
+        <img src="livros/acao/img/A_música_do_silêncio_(A_Crônica_do_Matador_do_Rei–Livro_3).PNG" alt="Livro Romance">
+        <h3>Amor nas Estrelas</h3>
+        <p>R$ 39,90</p>
+        <button class="btn" onclick="abrirDetalhes('Amor nas Estrelas','Maria Silva','Editora Alfa','R$ 39,90','Uma emocionante história de amor que ultrapassa as fronteiras do universo.')">Ver Detalhes</button>
+      </div>
+
+      <div class="product" data-categoria="ficcao">
+        <img src="https://picsum.photos/200/300?2" alt="Livro Ficção">
+        <h3>Mundos Paralelos</h3>
+        <p>R$ 49,90</p>
+        <button class="btn" onclick="abrirDetalhes('Mundos Paralelos','João Pereira','Editora Beta','R$ 49,90','Uma aventura épica entre dimensões alternativas cheias de mistério.')">Ver Detalhes</button>
+      </div>
+
+      <div class="product" data-categoria="historia">
+        <img src="https://picsum.photos/200/300?3" alt="Livro História">
+        <h3>Brasil Colonial</h3>
+        <p>R$ 59,90</p>
+        <button class="btn" onclick="abrirDetalhes('Brasil Colonial','Ana Costa','Editora História Viva','R$ 59,90','Um mergulho profundo nos acontecimentos que moldaram o Brasil do período colonial.')">Ver Detalhes</button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Sobre -->
+  <section id="sobre">
+    <h2>Sobre</h2>
+    <p>A Casa Bella oferece os melhores livros para todas as idades e estilos. Nosso objetivo é promover a leitura e levar conhecimento e entretenimento para nossos clientes através de uma seleção cuidadosa de títulos.</p>
+  </section>
+
+
+
+  <!-- Contato -->
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Email: literatech@livrariaonline.com</p>
+    <p>Telefone: (11) 99999-9999</p>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2025 LiteraTech - Todos os direitos reservados.</p>
+  </footer>
+
+  <!--  Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <h2 id="modalTitulo"></h2>
+      <p><strong>Autor:</strong> <span id="modalAutor"></span></p>
+      <p><strong>Editora:</strong> <span id="modalEditora"></span></p>
+      <p><strong>Preço:</strong> <span id="modalPreco"></span></p>
+      <p><strong>Descrição:</strong> <span id="modalDescricao"></span></p>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script>
+    function filtrarLivros() {
+      const filtro = document.getElementById("filtro-categoria").value;
+      const livros = document.querySelectorAll(".product");
+
+      livros.forEach(livro => {
+        const categoria = livro.getAttribute("data-categoria");
+
+        if (filtro === "todos" || categoria === filtro) {
+          livro.style.display = "block";
+        } else {
+          livro.style.display = "none";
+        }
+      });
+    }
+
+    function abrirDetalhes(titulo, autor, editora, preco, descricao) {
+      document.getElementById("modalTitulo").textContent = titulo;
+      document.getElementById("modalAutor").textContent = autor;
+      document.getElementById("modalEditora").textContent = editora;
+      document.getElementById("modalPreco").textContent = preco;
+      document.getElementById("modalDescricao").textContent = descricao;
+
+      document.getElementById("modal").style.display = "block";
+    }
+
+    function fecharModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == document.getElementById("modal")) {
+        fecharModal();
+      }
+    }
+  </script>
+
+</body>
+</html>
+
