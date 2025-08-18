@@ -20,6 +20,90 @@
               color: white;
     }
 
+/* Carrinho */
+.cart-container {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+#cartIcon {
+  width: 40px;
+  height: 40px;
+}
+
+#cartCount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.cart-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 300px;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.cart-menu h3 {
+  margin-top: 0;
+}
+
+.cart-menu ul {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.cart-menu li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+#checkoutBtn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cart-item input {
+  width: 40px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.cart-item button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
+
   </style>
 </head>
 
@@ -37,6 +121,21 @@
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
+
+<div class="cart-container">
+  <img src="img/carrinho_compra.jpg" alt="Carrinho" id="cartIcon">
+  <span id="cartCount">0</span>
+  <div id="cartMenu" class="cart-menu">
+    <h3>Carrinho</h3>
+    <ul id="cartItems">
+      <li>Seu carrinho está vazio.</li>
+    </ul>
+    <p><strong>Total:</strong> R$ <span id="cartTotal">0,00</span></p>
+    <button class="btn" id="checkoutBtn">Finalizar Compra</button>
+  </div>
+</div>
+
+
     </nav>
   </header>
 
@@ -74,26 +173,32 @@
     </div>
 
     <div class="products">
-      <div class="product" data-categoria="romance">
-        <img src="livros/acao/img/A_música_do_silêncio_(A_Crônica_do_Matador_do_Rei–Livro_3).PNG" alt="Livro Romance">
-        <h3>Amor nas Estrelas</h3>
-        <p>R$ 39,90</p>
-        <button class="btn" onclick="abrirDetalhes('Amor nas Estrelas','Maria Silva','Editora Alfa','R$ 39,90','Uma emocionante história de amor que ultrapassa as fronteiras do universo.')">Ver Detalhes</button>
-      </div>
+<div class="product" data-categoria="romance">
+  <img src="livros/acao/img/A_música_do_silêncio.png" alt="Livro Romance">
+  <h3>Amor nas Estrelas</h3>
+  <p>R$ 39,90</p>
+  <button class="btn" onclick="abrirDetalhes('Amor nas Estrelas','Maria Silva','Editora Alfa','R$ 39,90','Descrição do livro')">Ver Detalhes</button>
+  <button class="btn" onclick="adicionarAoCarrinho('Amor nas Estrelas','R$ 39,90')">Adicionar ao Carrinho</button>
+</div>
 
-      <div class="product" data-categoria="ficcao">
-        <img src="https://picsum.photos/200/300?2" alt="Livro Ficção">
-        <h3>Mundos Paralelos</h3>
-        <p>R$ 49,90</p>
-        <button class="btn" onclick="abrirDetalhes('Mundos Paralelos','João Pereira','Editora Beta','R$ 49,90','Uma aventura épica entre dimensões alternativas cheias de mistério.')">Ver Detalhes</button>
-      </div>
 
-      <div class="product" data-categoria="historia">
-        <img src="https://picsum.photos/200/300?3" alt="Livro História">
-        <h3>Brasil Colonial</h3>
-        <p>R$ 59,90</p>
-        <button class="btn" onclick="abrirDetalhes('Brasil Colonial','Ana Costa','Editora História Viva','R$ 59,90','Um mergulho profundo nos acontecimentos que moldaram o Brasil do período colonial.')">Ver Detalhes</button>
-      </div>
+<div class="product" data-categoria="fabula">
+  <img src="livros/Fábula/IMG/A_galinha_dos_ovos_de_ouro.jpg" alt="Livro Romance">
+  <h3>fabula</h3>
+  <p>R$ 39,90</p>
+  <button class="btn" onclick="abrirDetalhes('fabula','Maria Silva','Editora Alfa','R$ 39,90','Descrição do livro')">Ver Detalhes</button>
+  <button class="btn" onclick="adicionarAoCarrinho('fabula','R$ 39,90')">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product" data-categoria="romance">
+  <img src="livros/acao/img/A_música_do_silêncio.png" alt="Livro Romance">
+  <h3>Amor nas Estrelas</h3>
+  <p>R$ 39,90</p>
+  <button class="btn" onclick="abrirDetalhes('Amor nas Estrelas','Maria Silva','Editora Alfa','R$ 39,90','Descrição do livro')">Ver Detalhes</button>
+  <button class="btn" onclick="adicionarAoCarrinho('Amor nas Estrelas','R$ 39,90')">Adicionar ao Carrinho</button>
+</div>
+
+
     </div>
   </section>
 
@@ -168,6 +273,103 @@
         fecharModal();
       }
     }
+
+// Carrinho
+const cartIcon = document.getElementById('cartIcon');
+const cartMenu = document.getElementById('cartMenu');
+const cartCount = document.getElementById('cartCount');
+const cartTotal = document.getElementById('cartTotal');
+const cartItemsList = document.getElementById('cartItems');
+
+let cartItems = [];
+let total = 0;
+
+// Toggle menu carrinho
+cartIcon.addEventListener('click', () => {
+  cartMenu.style.display = cartMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+// Fechar ao clicar fora
+window.addEventListener('click', function(e) {
+  if (!cartMenu.contains(e.target) && e.target !== cartIcon) {
+    cartMenu.style.display = 'none';
+  }
+});
+
+// Função para atualizar visual do carrinho
+function atualizarCarrinho() {
+  cartItemsList.innerHTML = '';
+
+  if (cartItems.length === 0) {
+    cartItemsList.innerHTML = '<li>Seu carrinho está vazio.</li>';
+    cartCount.textContent = 0;
+    cartTotal.textContent = '0,00';
+    return;
+  }
+
+  let novoTotal = 0;
+
+  cartItems.forEach((item, index) => {
+    novoTotal += item.preco * item.quantidade;
+
+    const li = document.createElement('li');
+    li.className = 'cart-item';
+    li.innerHTML = `
+      ${item.titulo} - R$ ${item.preco.toFixed(2).replace('.', ',')}
+      <div>
+        <input type="number" min="1" value="${item.quantidade}" onchange="alterarQuantidade(${index}, this.value)">
+        <button onclick="removerItem(${index})">X</button>
+      </div>
+    `;
+    cartItemsList.appendChild(li);
+  });
+
+  cartCount.textContent = cartItems.length;
+  cartTotal.textContent = novoTotal.toFixed(2).replace('.', ',');
+}
+
+// Adicionar item ao carrinho
+function adicionarAoCarrinho(titulo, precoStr) {
+  let preco = parseFloat(precoStr.replace('R$ ', '').replace(',', '.'));
+
+  // Verifica se item já está no carrinho
+  const itemExistente = cartItems.find(item => item.titulo === titulo);
+  if (itemExistente) {
+    itemExistente.quantidade += 1;
+  } else {
+    cartItems.push({ titulo, preco, quantidade: 1 });
+  }
+
+  atualizarCarrinho();
+}
+
+// Alterar quantidade
+function alterarQuantidade(index, novaQuantidade) {
+  novaQuantidade = parseInt(novaQuantidade);
+  if (novaQuantidade < 1) novaQuantidade = 1;
+  cartItems[index].quantidade = novaQuantidade;
+  atualizarCarrinho();
+}
+
+// Remover item
+function removerItem(index) {
+  cartItems.splice(index, 1);
+  atualizarCarrinho();
+}
+
+// Finalizar compra
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  if(cartItems.length === 0){
+    alert('O carrinho está vazio!');
+    return;
+  }
+  alert('Compra concluída com sucesso!');
+  cartItems = [];
+  atualizarCarrinho();
+});
+
+
+
   </script>
 
 </body>
