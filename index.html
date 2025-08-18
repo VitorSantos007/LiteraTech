@@ -50,7 +50,7 @@
   position: absolute;
   right: 0;
   top: 50px;
-  width: 300px;
+  width: 350px;
   background: #fff;
   color: #333;
   border: 1px solid #ccc;
@@ -59,33 +59,33 @@
   z-index: 1000;
 }
 
-.cart-menu h3 {
-  margin-top: 0;
-}
-
-.cart-menu ul {
-  list-style: none;
-  padding: 0;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.cart-menu li {
-  padding: 5px 0;
-  border-bottom: 1px solid #eee;
-}
-
-#checkoutBtn {
-  width: 100%;
-  margin-top: 10px;
-}
-
 .cart-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  flex-direction: column; /* <<< força empilhar um abaixo do outro */
+  align-items: flex-start;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
 }
+
+.cart-item img {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+
+.cart-item-details {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.cart-item div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 
 .cart-item input {
   width: 40px;
@@ -101,7 +101,6 @@
   cursor: pointer;
   border-radius: 4px;
 }
-
 
 
   </style>
@@ -173,6 +172,7 @@
     </div>
 
     <div class="products">
+<<<<<<< HEAD
       <div class="product" data-categoria="romance">
         <img src="livros/romance/img/A_Culpa_E_Das_Estrelas.PNG" alt="Livro Romance">
         <h3>A culpa é das estrelas</h3>
@@ -207,6 +207,33 @@
         <p>R$ 49.90</p>
         <button class="btn" onclick="abrirDetalhes('O grande Gatsby','F. Scott Fitzgerald','Penguin-Companhia','R$ 49,90',' O Grande Gatsby de F. Scott Fitzgerald, retrata a Nova York dos anos 1920, marcada por jazz, festas e ostentação. Narrado por Nick Carraway, o romance acompanha Jay Gatsby, um homem misterioso e rico, obcecado por reconquistar sua antiga paixão, Daisy. A história expõe o contraste entre o romantismo idealista de Gatsby e o materialismo vazio da elite americana, revelando a face ilusória do chamado “sonho americano”.')">Ver Detalhes</button>
       </div>
+=======
+<div class="product" data-categoria="romance">
+  <img src="livros/acao/img/A_música_do_silêncio_(A_Crônica_do_Matador_do_Rei–Livro_3).PNG" alt="Livro Romance">
+  <h3>Amor nas Estrelas</h3>
+  <p>R$ 39,90</p>
+  <button class="btn" onclick="abrirDetalhes('Amor nas Estrelas','Maria Silva','Editora Alfa','R$ 39,90','Descrição do livro')">Ver Detalhes</button>
+  <button class="btn" onclick="adicionarAoCarrinho('Amor nas Estrelas','R$ 39,90','livros/acao/img/A_música_do_silêncio_(A_Crônica_do_Matador_do_Rei–Livro_3).PNG')">Adicionar ao Carrinho</button>
+
+</div>
+
+
+<div class="product" data-categoria="fabula">
+  <img src="livros/Fábula/IMG/A_galinha_dos_ovos_de_ouro.jpg" alt="Livro Romance">
+  <h3>fabula</h3>
+  <p>R$ 39,90</p>
+  <button class="btn" onclick="abrirDetalhes('fabula','Maria Silva','Editora Alfa','R$ 39,90','Descrição do livro')">Ver Detalhes</button>
+  <button class="btn" onclick="adicionarAoCarrinho('fabula','R$ 39,90','livros/Fábula/IMG/A_galinha_dos_ovos_de_ouro.jpg')">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product" data-categoria="romance">
+  <img src="livros/comedia/img/A_Mandragora.PNG" alt="Livro Romance">
+  <h3>comedia</h3>
+  <p>R$ 39,90</p>
+  <button class="btn" onclick="abrirDetalhes('comedia','Maria Silva','Editora Alfa','R$ 39,90','Descrição do livro')">Ver Detalhes</button>
+  <button class="btn" onclick="adicionarAoCarrinho('comedia','R$ 39,90','livros/comedia/img/A_Mandragora.PNG')">Adicionar ao Carrinho</button>
+</div>
+>>>>>>> origin/daniel
 
       <div class="product" data-categoria="acao">
         <img src="livros/acao/img/Box_Harry_Potter_vermelho_(edição_“britânica”).PNG" alt="Livro Ação">
@@ -310,7 +337,6 @@ const cartTotal = document.getElementById('cartTotal');
 const cartItemsList = document.getElementById('cartItems');
 
 let cartItems = [];
-let total = 0;
 
 // Toggle menu carrinho
 cartIcon.addEventListener('click', () => {
@@ -324,7 +350,7 @@ window.addEventListener('click', function(e) {
   }
 });
 
-// Função para atualizar visual do carrinho
+// Atualizar carrinho
 function atualizarCarrinho() {
   cartItemsList.innerHTML = '';
 
@@ -343,7 +369,10 @@ function atualizarCarrinho() {
     const li = document.createElement('li');
     li.className = 'cart-item';
     li.innerHTML = `
-      ${item.titulo} - R$ ${item.preco.toFixed(2).replace('.', ',')}
+      <img src="${item.img}" alt="${item.titulo}">
+      <div class="cart-item-details">
+        ${item.titulo} - R$ ${item.preco.toFixed(2).replace('.', ',')}
+      </div>
       <div>
         <input type="number" min="1" value="${item.quantidade}" onchange="alterarQuantidade(${index}, this.value)">
         <button onclick="removerItem(${index})">X</button>
@@ -357,15 +386,14 @@ function atualizarCarrinho() {
 }
 
 // Adicionar item ao carrinho
-function adicionarAoCarrinho(titulo, precoStr) {
+function adicionarAoCarrinho(titulo, precoStr, imgSrc) {
   let preco = parseFloat(precoStr.replace('R$ ', '').replace(',', '.'));
 
-  // Verifica se item já está no carrinho
   const itemExistente = cartItems.find(item => item.titulo === titulo);
   if (itemExistente) {
     itemExistente.quantidade += 1;
   } else {
-    cartItems.push({ titulo, preco, quantidade: 1 });
+    cartItems.push({ titulo, preco, quantidade: 1, img: imgSrc });
   }
 
   atualizarCarrinho();
@@ -395,8 +423,6 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
   cartItems = [];
   atualizarCarrinho();
 });
-
-
 
   </script>
 
